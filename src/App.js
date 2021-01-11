@@ -5,6 +5,16 @@ import Table from './components/Table';
 function App() {
     const [restaurants, setRestaurants] = useState([]);
 
+    const compareAlphabeticallyByNameThenState = (a, b) => {
+        if (a.name.toUpperCase() > b.name.toUpperCase()) return 1;
+        if (a.name.toUpperCase() < b.name.toUpperCase()) return -1;
+        if (a.name.toUpperCase() === b.name.toUpperCase()) {
+            if (a.state.toUpperCase() > b.state.toUpperCase()) return 1;
+            if (a.state.toUpperCase() < b.state.toUpperCase()) return -1;
+            return 0;
+        }
+    };
+
     useEffect(() => {
         fetch('https://code-challenge.spectrumtoolbox.com/api/restaurants', {
             headers: {
@@ -12,7 +22,9 @@ function App() {
             },
         })
             .then((response) => response.json())
-            .then(setRestaurants);
+            .then((restaurants) => {
+                setRestaurants(restaurants.sort(compareAlphabeticallyByNameThenState));
+            });
     }, []);
 
     return (
