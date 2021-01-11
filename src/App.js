@@ -5,6 +5,7 @@ import Filter from './components/Filter';
 
 function App() {
     const [restaurants, setRestaurants] = useState([]);
+    const [sortedRestaurants, setSortedRestaurants] = useState([]);
     const [updatedRestaurants, setUpdatedRestaurants] = useState([]);
 
     const compareAlphabeticallyByNameThenState = (a, b) => {
@@ -28,17 +29,18 @@ function App() {
     }, []);
 
     useEffect(() => {
-        setUpdatedRestaurants(
-            [...restaurants].sort(compareAlphabeticallyByNameThenState)
+        const allRestaurantsSorted = [...restaurants].sort(
+            compareAlphabeticallyByNameThenState
         );
+        setSortedRestaurants(allRestaurantsSorted);
+        setUpdatedRestaurants(allRestaurantsSorted);
     }, [restaurants]);
 
     return (
         <div className="App">
             <h1>Filter Restaurants</h1>
             <Filter
-                restaurants={restaurants}
-                updatedRestaurants={updatedRestaurants}
+                restaurants={sortedRestaurants}
                 setUpdatedRestaurants={setUpdatedRestaurants}
             />
             <Table restaurants={updatedRestaurants} />
