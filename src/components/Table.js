@@ -11,11 +11,11 @@ const Table = ({ restaurants }) => {
         <table>
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>City</th>
-                    <th>State</th>
-                    <th>Phone #</th>
-                    <th>Genres</th>
+                    <th className="name-column">Name</th>
+                    <th className="city-column">City</th>
+                    <th className="state-column">State</th>
+                    <th className="phone-column">Phone #</th>
+                    <th className="genre-column">Genres</th>
                 </tr>
             </thead>
             <tbody>{renderRestaurants()}</tbody>

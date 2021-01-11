@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import Table from './components/Table';
+import Filter from './components/Filter';
 
 function App() {
     const [restaurants, setRestaurants] = useState([]);
+    const [sortedRestaurants, setSortedRestaurants] = useState([]);
+    const [updatedRestaurants, setUpdatedRestaurants] = useState([]);
 
     const compareAlphabeticallyByNameThenState = (a, b) => {
         if (a.name.toUpperCase() > b.name.toUpperCase()) return 1;
@@ -22,15 +25,25 @@ function App() {
             },
         })
             .then((response) => response.json())
-            .then((restaurants) => {
-                setRestaurants(restaurants.sort(compareAlphabeticallyByNameThenState));
-            });
+            .then(setRestaurants);
     }, []);
+
+    useEffect(() => {
+        const allRestaurantsSorted = [...restaurants].sort(
+            compareAlphabeticallyByNameThenState
+        );
+        setSortedRestaurants(allRestaurantsSorted);
+        setUpdatedRestaurants(allRestaurantsSorted);
+    }, [restaurants]);
 
     return (
         <div className="App">
             <h1>Filter Restaurants</h1>
-            <Table restaurants={restaurants} />
+            <Filter
+                restaurants={sortedRestaurants}
+                setUpdatedRestaurants={setUpdatedRestaurants}
+            />
+            <Table restaurants={updatedRestaurants} />
         </div>
     );
 }
