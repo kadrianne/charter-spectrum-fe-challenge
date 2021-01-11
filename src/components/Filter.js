@@ -1,18 +1,24 @@
 import { useState } from 'react';
 
 const Filter = ({ restaurants, setUpdatedRestaurants }) => {
-    const [selectedState, setSelectedState] = useState('');
+    const [selectedState, setSelectedState] = useState('All');
 
     const handleStateChange = (event) => {
         setSelectedState(event.target.value);
     };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        let updatedRestaurants = restaurants.filter(
+    const filterRestaurants = () => {
+        const updatedRestaurants = restaurants.filter(
             (restaurant) => restaurant.state === selectedState
         );
         setUpdatedRestaurants(updatedRestaurants);
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        selectedState === 'All'
+            ? setUpdatedRestaurants(restaurants)
+            : filterRestaurants();
     };
 
     const renderStates = () => {
@@ -21,7 +27,9 @@ const Filter = ({ restaurants, setUpdatedRestaurants }) => {
             (value, index, self) => self.indexOf(value) === index
         );
         stateOptions.sort();
-        return stateOptions.map((state) => <option key={state}>{state}</option>);
+        return ['All', ...stateOptions].map((state) => (
+            <option key={state}>{state}</option>
+        ));
     };
 
     return (
