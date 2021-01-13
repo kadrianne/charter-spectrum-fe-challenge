@@ -12,16 +12,25 @@ const Filter = ({ restaurants, setUpdatedRestaurants }) => {
         setSelectedGenre(event.target.value);
     };
 
+    const handleFilterLogic = () => {
+        if (selectedState === 'All') {
+            return (restaurant) => restaurant.genre.includes(selectedGenre);
+        } else if (selectedGenre === 'All') {
+            return (restaurant) => restaurant.state.includes(selectedState);
+        } else {
+            return (restaurant) =>
+                restaurant.state.includes(selectedState) &&
+                restaurant.genre.includes(selectedGenre);
+        }
+    };
+
     const filterRestaurants = () => {
-        const updatedRestaurants = restaurants.filter(
-            (restaurant) => restaurant.state === selectedState
-        );
-        setUpdatedRestaurants(updatedRestaurants);
+        setUpdatedRestaurants(restaurants.filter(handleFilterLogic()));
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        selectedState === 'All'
+        selectedState === 'All' && selectedGenre === 'All'
             ? setUpdatedRestaurants(restaurants)
             : filterRestaurants();
     };
