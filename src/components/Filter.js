@@ -36,7 +36,7 @@ const Filter = ({ restaurants, setUpdatedRestaurants }) => {
     };
 
     const renderGenres = () => {
-        let genres = restaurants.map((restaurant) => restaurant.genre);
+        let genres = restaurants.map((restaurant) => restaurant.genre.split(','));
         let genreOptions = [...new Set(genres.flat().sort())];
         return ['All', ...genreOptions].map((genre) => (
             <option key={genre}>{genre}</option>
