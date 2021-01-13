@@ -45,7 +45,7 @@ const Filter = ({ restaurants, setUpdatedRestaurants }) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <label htmlFor="state-filter">By State: </label>
+            <label htmlFor="state-filter">By State:</label>
             <select
                 id="state-filter"
                 name="state"
@@ -54,7 +54,7 @@ const Filter = ({ restaurants, setUpdatedRestaurants }) => {
             >
                 {renderStates()}
             </select>
-            <label htmlFor="genre-filter">By Genre: </label>
+            <label htmlFor="genre-filter">By Genre:</label>
             <select
                 id="genre-filter"
                 name="genre"

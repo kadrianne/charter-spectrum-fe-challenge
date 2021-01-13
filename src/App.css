@@ -31,8 +31,17 @@ form {
     margin: 10px;
 }
 
+label {
+    margin-right: 5px;
+}
+
+input,
 select {
-    margin-right: 20px;
+    margin-right: 10px;
+}
+
+#search-field {
+    width: 200px;
 }
 
 .name-column {

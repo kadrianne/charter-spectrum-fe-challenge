@@ -9,13 +9,14 @@ const Search = () => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <label className={{ display: 'none' }} htmlFor="search-field">
+            <label style={{ display: 'none' }} htmlFor="search-field">
                 Search:
             </label>
             <input
                 id="search-field"
                 name="search"
                 type="text"
+                placeholder="Search by name, city, or genre"
                 value={searchText}
                 onChange={handleTextChange}
             />
