@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import Table from './components/Table';
 import Filter from './components/Filter';
+import Search from './components/Search';
 
 function App() {
     const [restaurants, setRestaurants] = useState([]);
@@ -44,6 +45,7 @@ function App() {
     return (
         <div className="App">
             <h1>Filter Restaurants</h1>
+            <Search />
             <Filter
                 restaurants={sortedRestaurants}
                 setUpdatedRestaurants={setUpdatedRestaurants}
