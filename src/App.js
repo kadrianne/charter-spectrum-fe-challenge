@@ -25,7 +25,12 @@ function App() {
             },
         })
             .then((response) => response.json())
-            .then(setRestaurants);
+            .then((results) => {
+                const cleanedRestaurants = results.map((restaurant) => {
+                    return { ...restaurant, genre: restaurant.genre.split(',') };
+                });
+                setRestaurants(cleanedRestaurants);
+            });
     }, []);
 
     useEffect(() => {
