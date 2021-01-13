@@ -2,9 +2,14 @@ import { useState } from 'react';
 
 const Filter = ({ restaurants, setUpdatedRestaurants }) => {
     const [selectedState, setSelectedState] = useState('All');
+    const [selectedGenre, setSelectedGenre] = useState('All');
 
     const handleStateChange = (event) => {
         setSelectedState(event.target.value);
+    };
+
+    const handleGenreChange = (event) => {
+        setSelectedGenre(event.target.value);
     };
 
     const filterRestaurants = () => {
@@ -29,6 +34,14 @@ const Filter = ({ restaurants, setUpdatedRestaurants }) => {
         ));
     };
 
+    const renderGenres = () => {
+        let genres = restaurants.map((restaurant) => restaurant.genre);
+        let genreOptions = [...new Set(genres.flat().sort())];
+        return ['All', ...genreOptions].map((genre) => (
+            <option key={genre}>{genre}</option>
+        ));
+    };
+
     return (
         <form onSubmit={handleSubmit}>
             <label htmlFor="state-filter">By State: </label>
@@ -39,6 +52,15 @@ const Filter = ({ restaurants, setUpdatedRestaurants }) => {
                 onChange={handleStateChange}
             >
                 {renderStates()}
+            </select>
+            <label htmlFor="genre-filter">By Genre: </label>
+            <select
+                id="genre-filter"
+                name="genre"
+                value={selectedGenre}
+                onChange={handleGenreChange}
+            >
+                {renderGenres()}
             </select>
             <input type="submit" value="Filter" />
         </form>
