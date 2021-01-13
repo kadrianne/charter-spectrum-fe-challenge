@@ -2,9 +2,13 @@ import TableRow from './TableRow';
 
 const Table = ({ restaurants }) => {
     const renderRestaurants = () => {
-        return restaurants.map((restaurant) => (
-            <TableRow key={restaurant.id} restaurant={restaurant} />
-        ));
+        return restaurants.map((restaurant) => {
+            const cleanedRestaurant = {
+                ...restaurant,
+                genre: restaurant.genre.split(','),
+            };
+            return <TableRow key={restaurant.id} restaurant={cleanedRestaurant} />;
+        });
     };
 
     return (

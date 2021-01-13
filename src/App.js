@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import Table from './components/Table';
 import Filter from './components/Filter';
+import Search from './components/Search';
 
 function App() {
     const [restaurants, setRestaurants] = useState([]);
@@ -25,12 +26,7 @@ function App() {
             },
         })
             .then((response) => response.json())
-            .then((results) => {
-                const cleanedRestaurants = results.map((restaurant) => {
-                    return { ...restaurant, genre: restaurant.genre.split(',') };
-                });
-                setRestaurants(cleanedRestaurants);
-            });
+            .then(setRestaurants);
     }, []);
 
     useEffect(() => {
@@ -44,6 +40,10 @@ function App() {
     return (
         <div className="App">
             <h1>Filter Restaurants</h1>
+            <Search
+                restaurants={sortedRestaurants}
+                setUpdatedRestaurants={setUpdatedRestaurants}
+            />
             <Filter
                 restaurants={sortedRestaurants}
                 setUpdatedRestaurants={setUpdatedRestaurants}

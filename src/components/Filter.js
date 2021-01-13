@@ -1,16 +1,8 @@
-import { useState } from 'react';
+import useFormField from '../hooks/useFormField';
 
 const Filter = ({ restaurants, setUpdatedRestaurants }) => {
-    const [selectedState, setSelectedState] = useState('All');
-    const [selectedGenre, setSelectedGenre] = useState('All');
-
-    const handleStateChange = (event) => {
-        setSelectedState(event.target.value);
-    };
-
-    const handleGenreChange = (event) => {
-        setSelectedGenre(event.target.value);
-    };
+    const [selectedState, handleStateChange] = useFormField('All');
+    const [selectedGenre, handleGenreChange] = useFormField('All');
 
     const handleFilterLogic = () => {
         if (selectedState === 'All') {
@@ -44,7 +36,7 @@ const Filter = ({ restaurants, setUpdatedRestaurants }) => {
     };
 
     const renderGenres = () => {
-        let genres = restaurants.map((restaurant) => restaurant.genre);
+        let genres = restaurants.map((restaurant) => restaurant.genre.split(','));
         let genreOptions = [...new Set(genres.flat().sort())];
         return ['All', ...genreOptions].map((genre) => (
             <option key={genre}>{genre}</option>
@@ -53,7 +45,7 @@ const Filter = ({ restaurants, setUpdatedRestaurants }) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <label htmlFor="state-filter">By State: </label>
+            <label htmlFor="state-filter">By State:</label>
             <select
                 id="state-filter"
                 name="state"
@@ -62,7 +54,7 @@ const Filter = ({ restaurants, setUpdatedRestaurants }) => {
             >
                 {renderStates()}
             </select>
-            <label htmlFor="genre-filter">By Genre: </label>
+            <label htmlFor="genre-filter">By Genre:</label>
             <select
                 id="genre-filter"
                 name="genre"
