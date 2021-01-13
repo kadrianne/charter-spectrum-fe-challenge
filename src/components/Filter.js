@@ -23,10 +23,7 @@ const Filter = ({ restaurants, setUpdatedRestaurants }) => {
 
     const renderStates = () => {
         let states = restaurants.map((restaurant) => restaurant.state);
-        let stateOptions = states.filter(
-            (value, index, self) => self.indexOf(value) === index
-        );
-        stateOptions.sort();
+        let stateOptions = [...new Set(states.sort())];
         return ['All', ...stateOptions].map((state) => (
             <option key={state}>{state}</option>
         ));
@@ -34,7 +31,7 @@ const Filter = ({ restaurants, setUpdatedRestaurants }) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <label for="state-filter">By State: </label>
+            <label htmlFor="state-filter">By State: </label>
             <select
                 id="state-filter"
                 name="state"
