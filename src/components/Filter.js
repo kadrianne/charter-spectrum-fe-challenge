@@ -1,16 +1,8 @@
-import { useState } from 'react';
+import useFormField from '../hooks/useFormField';
 
 const Filter = ({ restaurants, setUpdatedRestaurants }) => {
-    const [selectedState, setSelectedState] = useState('All');
-    const [selectedGenre, setSelectedGenre] = useState('All');
-
-    const handleStateChange = (event) => {
-        setSelectedState(event.target.value);
-    };
-
-    const handleGenreChange = (event) => {
-        setSelectedGenre(event.target.value);
-    };
+    const [selectedState, handleStateChange] = useFormField('All');
+    const [selectedGenre, handleGenreChange] = useFormField('All');
 
     const handleFilterLogic = () => {
         if (selectedState === 'All') {
