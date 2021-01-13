@@ -5,9 +5,8 @@ const Search = ({ restaurants, setUpdatedRestaurants }) => {
 
     const handleSearchLogic = (restaurant) =>
         restaurant.name.toLowerCase().includes(searchText.toLowerCase()) ||
-        restaurant.city.toLowerCase().includes(searchText.toLowerCase());
-    // restaurant.genre.map((g) => g.toLowerCase().includes(searchText.toLowerCase()));
-    // };
+        restaurant.city.toLowerCase().includes(searchText.toLowerCase()) ||
+        restaurant.genre.toLowerCase().includes(searchText.toLowerCase());
 
     const handleSubmit = (event) => {
         event.preventDefault();
