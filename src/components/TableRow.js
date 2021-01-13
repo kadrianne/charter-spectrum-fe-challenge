@@ -5,7 +5,7 @@ const TableRow = ({ restaurant }) => {
             <td>{restaurant.city}</td>
             <td>{restaurant.state}</td>
             <td>{restaurant.telephone}</td>
-            <td>{restaurant.genre}</td>
+            <td>{restaurant.genre.join(', ')}</td>
         </tr>
     );
 };
