@@ -45,7 +45,10 @@ function App() {
     return (
         <div className="App">
             <h1>Filter Restaurants</h1>
-            <Search />
+            <Search
+                restaurants={sortedRestaurants}
+                setUpdatedRestaurants={setUpdatedRestaurants}
+            />
             <Filter
                 restaurants={sortedRestaurants}
                 setUpdatedRestaurants={setUpdatedRestaurants}
