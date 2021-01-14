@@ -7,6 +7,7 @@ import Search from './components/Search';
 function App() {
     const [restaurants, setRestaurants] = useState([]);
     const [sortedRestaurants, setSortedRestaurants] = useState([]);
+    const [searchedRestaurants, setSearchedRestaurants] = useState([]);
     const [updatedRestaurants, setUpdatedRestaurants] = useState([]);
 
     const compareAlphabeticallyByNameThenState = (a, b) => {
@@ -37,15 +38,21 @@ function App() {
         setUpdatedRestaurants(allRestaurantsSorted);
     }, [restaurants]);
 
+    useEffect(() => {
+        searchedRestaurants.length > 0 && setUpdatedRestaurants(searchedRestaurants);
+    }, [searchedRestaurants]);
+
     return (
         <div className="App">
             <h1>Filter Restaurants</h1>
             <Search
                 restaurants={sortedRestaurants}
                 setUpdatedRestaurants={setUpdatedRestaurants}
+                setSearchedRestaurants={setSearchedRestaurants}
             />
             <Filter
                 restaurants={sortedRestaurants}
+                searchedRestaurants={searchedRestaurants}
                 setUpdatedRestaurants={setUpdatedRestaurants}
             />
             <Table restaurants={updatedRestaurants} />

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import useFormField from '../hooks/useFormField';
 
-const Filter = ({ restaurants, setUpdatedRestaurants }) => {
+const Filter = ({ restaurants, searchedRestaurants, setUpdatedRestaurants }) => {
     const [selectedState, handleStateChange] = useFormField('All');
     const [selectedGenre, handleGenreChange] = useFormField('All');
 
@@ -17,19 +17,25 @@ const Filter = ({ restaurants, setUpdatedRestaurants }) => {
         }
     };
 
-    const allFilterLogic = () => {
-        selectedState === 'All' && selectedGenre === 'All'
-            ? setUpdatedRestaurants(restaurants)
-            : filterRestaurants();
+    const filterRestaurants = (restaurantSet) => {
+        setUpdatedRestaurants(restaurantSet.filter(handleFilterLogic()));
     };
 
-    const filterRestaurants = () => {
-        setUpdatedRestaurants(restaurants.filter(handleFilterLogic()));
+    const allFilterLogic = (restaurantSet) => {
+        selectedState === 'All' && selectedGenre === 'All'
+            ? setUpdatedRestaurants(restaurantSet)
+            : filterRestaurants(restaurantSet);
+    };
+
+    const checkForSearchedRestaurants = () => {
+        searchedRestaurants.length > 0
+            ? allFilterLogic(searchedRestaurants)
+            : allFilterLogic(restaurants);
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        allFilterLogic();
+        checkForSearchedRestaurants();
     };
 
     const renderStates = () => {
@@ -50,13 +56,13 @@ const Filter = ({ restaurants, setUpdatedRestaurants }) => {
 
     useEffect(() => {
         if (selectedState === 'All') {
-            allFilterLogic();
+            checkForSearchedRestaurants();
         }
     }, [selectedState]);
 
     useEffect(() => {
         if (selectedGenre === 'All') {
-            allFilterLogic();
+            checkForSearchedRestaurants();
         }
     }, [selectedGenre]);
 
