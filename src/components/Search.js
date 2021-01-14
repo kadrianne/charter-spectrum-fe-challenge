@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import useFormField from '../hooks/useFormField';
 
 const Search = ({ restaurants, setUpdatedRestaurants }) => {
@@ -12,6 +13,12 @@ const Search = ({ restaurants, setUpdatedRestaurants }) => {
         event.preventDefault();
         setUpdatedRestaurants(restaurants.filter(handleSearchLogic));
     };
+
+    useEffect(() => {
+        if (searchText === '') {
+            setUpdatedRestaurants(restaurants);
+        }
+    }, [searchText]);
 
     return (
         <form onSubmit={handleSubmit}>
