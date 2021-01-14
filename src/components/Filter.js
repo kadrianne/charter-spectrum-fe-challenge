@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import useFormField from '../hooks/useFormField';
 
 const Filter = ({ restaurants, setUpdatedRestaurants }) => {
@@ -16,15 +17,19 @@ const Filter = ({ restaurants, setUpdatedRestaurants }) => {
         }
     };
 
+    const allFilterLogic = () => {
+        selectedState === 'All' && selectedGenre === 'All'
+            ? setUpdatedRestaurants(restaurants)
+            : filterRestaurants();
+    };
+
     const filterRestaurants = () => {
         setUpdatedRestaurants(restaurants.filter(handleFilterLogic()));
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        selectedState === 'All' && selectedGenre === 'All'
-            ? setUpdatedRestaurants(restaurants)
-            : filterRestaurants();
+        allFilterLogic();
     };
 
     const renderStates = () => {
@@ -42,6 +47,18 @@ const Filter = ({ restaurants, setUpdatedRestaurants }) => {
             <option key={genre}>{genre}</option>
         ));
     };
+
+    useEffect(() => {
+        if (selectedState === 'All') {
+            allFilterLogic();
+        }
+    }, [selectedState]);
+
+    useEffect(() => {
+        if (selectedGenre === 'All') {
+            allFilterLogic();
+        }
+    }, [selectedGenre]);
 
     return (
         <form onSubmit={handleSubmit}>
