@@ -4,9 +4,9 @@ import Search from './Search';
 import useFormField from '../hooks/useFormField';
 
 const SearchFilter = ({ restaurants, setUpdatedRestaurants }) => {
-    const [searchedRestaurants, setSearchedRestaurants] = useState([...restaurants]);
-    const [selectedState, handleStateChange] = useFormField('All');
-    const [selectedGenre, handleGenreChange] = useFormField('All');
+    const [searchedRestaurants, setSearchedRestaurants] = useState([]);
+    const [selectedState, handleStateChange, setSelectedState] = useFormField('All');
+    const [selectedGenre, handleGenreChange, setSelectedGenre] = useFormField('All');
     const [filtersOn, setFiltersOn] = useState(false);
     const [searchText, handleTextChange] = useFormField('');
 
@@ -43,12 +43,28 @@ const SearchFilter = ({ restaurants, setUpdatedRestaurants }) => {
     };
 
     useEffect(() => {
-        filtersOn
-            ? selectedState === 'All' && selectedGenre === 'All'
-                ? setUpdatedRestaurants(searchedRestaurants)
-                : filterRestaurants()
-            : setUpdatedRestaurants(searchedRestaurants);
-    }, [filtersOn, searchedRestaurants, selectedState, selectedGenre]);
+        setSearchedRestaurants([...restaurants]);
+    }, [restaurants]);
+
+    useEffect(() => {
+        selectedState === 'All' && selectedGenre === 'All'
+            ? setUpdatedRestaurants(searchedRestaurants)
+            : filterRestaurants();
+    }, [searchedRestaurants, selectedState, selectedGenre]);
+
+    useEffect(() => {
+        if (!filtersOn) {
+            setUpdatedRestaurants(searchedRestaurants);
+            setSelectedState('All');
+            setSelectedGenre('All');
+        }
+    }, [filtersOn]);
+
+    useEffect(() => {
+        if (searchText === '') {
+            setSearchedRestaurants(restaurants);
+        }
+    }, [searchText]);
 
     return (
         <>
@@ -60,7 +76,7 @@ const SearchFilter = ({ restaurants, setUpdatedRestaurants }) => {
             {filtersOn ? (
                 <>
                     <button className="button-toggle" onClick={handleButtonToggle}>
-                        Hide Filters
+                        Clear Filters
                     </button>
                     <Filter
                         restaurants={restaurants}
