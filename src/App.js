@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import Table from './components/Table';
+import PaginatedTable from './components/PaginatedTable';
 import SearchFilter from './components/SearchFilter';
 
 function App() {
@@ -43,7 +43,7 @@ function App() {
                 restaurants={sortedRestaurants}
                 setUpdatedRestaurants={setUpdatedRestaurants}
             />
-            <Table restaurants={updatedRestaurants} />
+            <PaginatedTable restaurants={updatedRestaurants} />
         </div>
     );
 }
