@@ -7,8 +7,10 @@ const SearchFilter = ({ restaurants, setUpdatedRestaurants }) => {
     const [searchedRestaurants, setSearchedRestaurants] = useState([...restaurants]);
     const [selectedState, handleStateChange] = useFormField('All');
     const [selectedGenre, handleGenreChange] = useFormField('All');
+    const [filtersOn, setFiltersOn] = useState(false);
     const [searchText, handleTextChange] = useFormField('');
 
+    const handleButtonToggle = () => setFiltersOn(!filtersOn);
     const handleSearchLogic = (restaurant) =>
         restaurant.name.toLowerCase().includes(searchText.toLowerCase()) ||
         restaurant.city.toLowerCase().includes(searchText.toLowerCase()) ||
@@ -41,10 +43,12 @@ const SearchFilter = ({ restaurants, setUpdatedRestaurants }) => {
     };
 
     useEffect(() => {
-        selectedState === 'All' && selectedGenre === 'All'
-            ? setUpdatedRestaurants(searchedRestaurants)
-            : filterRestaurants();
-    }, [searchedRestaurants, selectedState, selectedGenre]);
+        filtersOn
+            ? selectedState === 'All' && selectedGenre === 'All'
+                ? setUpdatedRestaurants(searchedRestaurants)
+                : filterRestaurants()
+            : setUpdatedRestaurants(searchedRestaurants);
+    }, [filtersOn, searchedRestaurants, selectedState, selectedGenre]);
 
     return (
         <>
@@ -53,13 +57,24 @@ const SearchFilter = ({ restaurants, setUpdatedRestaurants }) => {
                 handleTextChange={handleTextChange}
                 handleSubmit={handleSubmit}
             />
-            <Filter
-                restaurants={restaurants}
-                selectedState={selectedState}
-                selectedGenre={selectedGenre}
-                handleStateChange={handleStateChange}
-                handleGenreChange={handleGenreChange}
-            />
+            {filtersOn ? (
+                <>
+                    <button className="button-toggle" onClick={handleButtonToggle}>
+                        Hide Filters
+                    </button>
+                    <Filter
+                        restaurants={restaurants}
+                        selectedState={selectedState}
+                        selectedGenre={selectedGenre}
+                        handleStateChange={handleStateChange}
+                        handleGenreChange={handleGenreChange}
+                    />
+                </>
+            ) : (
+                <button className="button-toggle" onClick={handleButtonToggle}>
+                    Apply Filters
+                </button>
+            )}
         </>
     );
 };
