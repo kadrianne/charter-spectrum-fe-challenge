@@ -60,6 +60,12 @@ const SearchFilter = ({ restaurants, setUpdatedRestaurants }) => {
         }
     }, [filtersOn]);
 
+    useEffect(() => {
+        if (searchText === '') {
+            setSearchedRestaurants(restaurants);
+        }
+    }, [searchText]);
+
     return (
         <>
             <Search
