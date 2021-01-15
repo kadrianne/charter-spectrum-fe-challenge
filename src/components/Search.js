@@ -1,25 +1,4 @@
-import { useEffect } from 'react';
-import useFormField from '../hooks/useFormField';
-
-const Search = ({ restaurants, setUpdatedRestaurants, setSearchedRestaurants }) => {
-    const [searchText, handleTextChange] = useFormField('');
-
-    const handleSearchLogic = (restaurant) =>
-        restaurant.name.toLowerCase().includes(searchText.toLowerCase()) ||
-        restaurant.city.toLowerCase().includes(searchText.toLowerCase()) ||
-        restaurant.genre.toLowerCase().includes(searchText.toLowerCase());
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        setSearchedRestaurants(restaurants.filter(handleSearchLogic));
-    };
-
-    useEffect(() => {
-        if (searchText === '') {
-            setSearchedRestaurants(restaurants);
-        }
-    }, [searchText]);
-
+const Search = ({ searchText, handleTextChange, handleSubmit }) => {
     return (
         <form onSubmit={handleSubmit}>
             <label style={{ display: 'none' }} htmlFor="search-field">
