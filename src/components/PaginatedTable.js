@@ -18,7 +18,7 @@ const PaginatedTable = ({ restaurants }) => {
     const displayAvailablePages = () => {
         const pages = Array.from(Array(Math.ceil(restaurants.length / 10)).keys());
         return pages.map((page) => (
-            <button key={page} onClick={handleClick}>
+            <button key={page} className="page-button" onClick={handleClick}>
                 {page + 1}
             </button>
         ));
@@ -32,8 +32,10 @@ const PaginatedTable = ({ restaurants }) => {
 
     return (
         <>
-            <p>{restaurants.length} Results</p>
-            <div className="pages">{displayAvailablePages()}</div>
+            <div className="pagination">
+                <p className="results">{restaurants.length} Results</p>
+                <div className="pages">Show Page: {displayAvailablePages()}</div>
+            </div>
             <Table restaurants={paginatedRestaurants} />
         </>
     );
