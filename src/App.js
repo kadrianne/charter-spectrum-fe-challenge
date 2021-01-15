@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import Table from './components/Table';
-import Filter from './components/Filter';
-import Search from './components/Search';
+import SearchFilter from './components/SearchFilter';
 
 function App() {
     const [restaurants, setRestaurants] = useState([]);
@@ -40,11 +39,7 @@ function App() {
     return (
         <div className="App">
             <h1>Filter Restaurants</h1>
-            <Search
-                restaurants={sortedRestaurants}
-                setUpdatedRestaurants={setUpdatedRestaurants}
-            />
-            <Filter
+            <SearchFilter
                 restaurants={sortedRestaurants}
                 setUpdatedRestaurants={setUpdatedRestaurants}
             />

@@ -1,18 +1,4 @@
-import useFormField from '../hooks/useFormField';
-
-const Search = ({ restaurants, setUpdatedRestaurants }) => {
-    const [searchText, handleTextChange] = useFormField('');
-
-    const handleSearchLogic = (restaurant) =>
-        restaurant.name.toLowerCase().includes(searchText.toLowerCase()) ||
-        restaurant.city.toLowerCase().includes(searchText.toLowerCase()) ||
-        restaurant.genre.toLowerCase().includes(searchText.toLowerCase());
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        setUpdatedRestaurants(restaurants.filter(handleSearchLogic));
-    };
-
+const Search = ({ searchText, handleTextChange, handleSubmit }) => {
     return (
         <form onSubmit={handleSubmit}>
             <label style={{ display: 'none' }} htmlFor="search-field">

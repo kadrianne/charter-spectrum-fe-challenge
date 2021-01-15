@@ -59,3 +59,8 @@ select {
 .genre-column {
     width: 450px;
 }
+
+.filter,
+.button-toggle {
+    margin-bottom: 10px;
+}

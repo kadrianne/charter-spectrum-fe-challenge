@@ -1,37 +1,10 @@
-import { useEffect } from 'react';
-import useFormField from '../hooks/useFormField';
-
-const Filter = ({ restaurants, setUpdatedRestaurants }) => {
-    const [selectedState, handleStateChange] = useFormField('All');
-    const [selectedGenre, handleGenreChange] = useFormField('All');
-
-    const handleFilterLogic = () => {
-        if (selectedState === 'All') {
-            return (restaurant) => restaurant.genre.includes(selectedGenre);
-        } else if (selectedGenre === 'All') {
-            return (restaurant) => restaurant.state.includes(selectedState);
-        } else {
-            return (restaurant) =>
-                restaurant.state.includes(selectedState) &&
-                restaurant.genre.includes(selectedGenre);
-        }
-    };
-
-    const allFilterLogic = () => {
-        selectedState === 'All' && selectedGenre === 'All'
-            ? setUpdatedRestaurants(restaurants)
-            : filterRestaurants();
-    };
-
-    const filterRestaurants = () => {
-        setUpdatedRestaurants(restaurants.filter(handleFilterLogic()));
-    };
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        allFilterLogic();
-    };
-
+const Filter = ({
+    restaurants,
+    selectedState,
+    selectedGenre,
+    handleStateChange,
+    handleGenreChange,
+}) => {
     const renderStates = () => {
         let states = restaurants.map((restaurant) => restaurant.state);
         let stateOptions = [...new Set(states.sort())];
@@ -48,20 +21,8 @@ const Filter = ({ restaurants, setUpdatedRestaurants }) => {
         ));
     };
 
-    useEffect(() => {
-        if (selectedState === 'All') {
-            allFilterLogic();
-        }
-    }, [selectedState]);
-
-    useEffect(() => {
-        if (selectedGenre === 'All') {
-            allFilterLogic();
-        }
-    }, [selectedGenre]);
-
     return (
-        <form onSubmit={handleSubmit}>
+        <div className="filter">
             <label htmlFor="state-filter">By State:</label>
             <select
                 id="state-filter"
@@ -80,8 +41,7 @@ const Filter = ({ restaurants, setUpdatedRestaurants }) => {
             >
                 {renderGenres()}
             </select>
-            <input type="submit" value="Filter" />
-        </form>
+        </div>
     );
 };
 
