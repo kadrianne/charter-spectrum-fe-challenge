@@ -5,5 +5,5 @@ export default function useFormField(initialState) {
 
     const handleFieldChange = (event) => setField(event.target.value);
 
-    return [field, handleFieldChange];
+    return [field, handleFieldChange, setField];
 }
