@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import Table from './Table';
+import loadingSpinner from '../assets/loading-spinner.svg';
 
-const PaginatedTable = ({ restaurants }) => {
+const PaginatedTable = ({ isLoaded, setIsLoaded, restaurants }) => {
     const [paginatedRestaurants, setPaginatedRestaurants] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
 
@@ -25,18 +26,33 @@ const PaginatedTable = ({ restaurants }) => {
     };
 
     useEffect(() => {
-        if (restaurants.length > 0) {
-            paginateRestaurants();
-        }
+        paginateRestaurants();
     }, [restaurants, currentPage]);
+
+    useEffect(() => {
+        paginatedRestaurants.length > 0 && setIsLoaded(true);
+    }, [paginatedRestaurants]);
 
     return (
         <>
-            <div className="pagination">
-                <p className="results">{restaurants.length} Results</p>
-                <div className="pages">Show Page: {displayAvailablePages()}</div>
-            </div>
-            <Table restaurants={paginatedRestaurants} />
+            {isLoaded ? (
+                <>
+                    <div className="pagination">
+                        <p className="results">{restaurants.length} Results</p>
+                        {restaurants.length > 0 && (
+                            <div className="pages">
+                                Show Page: {displayAvailablePages()}
+                            </div>
+                        )}
+                    </div>
+                    <Table restaurants={paginatedRestaurants} />
+                </>
+            ) : (
+                <>
+                    <p className="loading">LOADING...</p>
+                    <img src={loadingSpinner} alt="loading icon" />
+                </>
+            )}
         </>
     );
 };

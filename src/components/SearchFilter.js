@@ -67,7 +67,7 @@ const SearchFilter = ({ restaurants, setUpdatedRestaurants }) => {
     }, [searchText]);
 
     return (
-        <>
+        <div className="search-filter">
             <Search
                 searchText={searchText}
                 handleTextChange={handleTextChange}
@@ -88,10 +88,10 @@ const SearchFilter = ({ restaurants, setUpdatedRestaurants }) => {
                 </>
             ) : (
                 <button className="button-toggle" onClick={handleButtonToggle}>
-                    Apply Filters
+                    Add Filters
                 </button>
             )}
-        </>
+        </div>
     );
 };
 
