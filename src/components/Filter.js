@@ -23,7 +23,8 @@ const Filter = ({
 
     return (
         <div className="filter">
-            <label htmlFor="state-filter">By State:</label>
+            <p>Filter By: </p>
+            <label htmlFor="state-filter">State:</label>
             <select
                 id="state-filter"
                 name="state"
@@ -32,7 +33,7 @@ const Filter = ({
             >
                 {renderStates()}
             </select>
-            <label htmlFor="genre-filter">By Genre:</label>
+            <label htmlFor="genre-filter">Genre:</label>
             <select
                 id="genre-filter"
                 name="genre"
