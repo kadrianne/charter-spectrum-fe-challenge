@@ -1,3 +1,5 @@
+import Button from 'react-bootstrap/Button';
+
 const Search = ({ searchText, handleTextChange, handleSubmit }) => {
     return (
         <form onSubmit={handleSubmit}>
@@ -12,7 +14,9 @@ const Search = ({ searchText, handleTextChange, handleSubmit }) => {
                 value={searchText}
                 onChange={handleTextChange}
             />
-            <input type="submit" value="Search" />
+            <Button size="sm" type="submit">
+                Search
+            </Button>
         </form>
     );
 };

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Filter from './Filter';
 import Search from './Search';
 import useFormField from '../hooks/useFormField';
+import Button from 'react-bootstrap/Button';
 
 const SearchFilter = ({ restaurants, setUpdatedRestaurants }) => {
     const [searchedRestaurants, setSearchedRestaurants] = useState([]);
@@ -73,23 +74,22 @@ const SearchFilter = ({ restaurants, setUpdatedRestaurants }) => {
                 handleTextChange={handleTextChange}
                 handleSubmit={handleSubmit}
             />
-            {filtersOn ? (
-                <>
-                    <button className="button-toggle" onClick={handleButtonToggle}>
-                        Clear Filters
-                    </button>
-                    <Filter
-                        restaurants={restaurants}
-                        selectedState={selectedState}
-                        selectedGenre={selectedGenre}
-                        handleStateChange={handleStateChange}
-                        handleGenreChange={handleGenreChange}
-                    />
-                </>
-            ) : (
-                <button className="button-toggle" onClick={handleButtonToggle}>
-                    Add Filters
-                </button>
+            <Button
+                size="sm"
+                variant="outline-primary"
+                className="button-toggle"
+                onClick={handleButtonToggle}
+            >
+                {filtersOn ? 'Add' : 'Clear'} Filters
+            </Button>
+            {!filtersOn && (
+                <Filter
+                    restaurants={restaurants}
+                    selectedState={selectedState}
+                    selectedGenre={selectedGenre}
+                    handleStateChange={handleStateChange}
+                    handleGenreChange={handleGenreChange}
+                />
             )}
         </div>
     );
