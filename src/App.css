@@ -12,6 +12,7 @@
 h1 {
     margin: 0;
     margin-bottom: 25px;
+    font-weight: 700;
 }
 
 header {
@@ -27,17 +28,16 @@ td {
 
 th,
 td {
-    border: 1px solid black;
+    border: 1px solid #007bff;
 }
 
 th {
-    background-color: #26409e;
-    color: white;
+    background-color: #6eb0f7;
+    color: black;
 }
 
-.search-filter {
-    display: flex;
-    align-items: flex-end;
+td {
+    cursor: pointer;
 }
 
 label {
@@ -49,18 +49,35 @@ select {
     margin-right: 10px;
 }
 
-.button-toggle {
+p {
+    font-weight: 700;
+    margin: 0;
+}
+
+button {
     margin-right: 10px;
 }
 
-p {
-    display: inline;
-    font-weight: 700;
-    margin: 0 0px 10px 0;
+#search-field {
+    width: 400px;
 }
 
-#search-field {
-    width: 200px;
+.search-filter {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 20px;
+}
+
+.filter {
+    margin: auto 0;
+}
+
+.filter-text {
+    display: inline;
+}
+
+.button-toggle {
+    margin-right: 10px;
 }
 
 .loading {
@@ -69,27 +86,32 @@ p {
     text-align: center;
 }
 
-.pagination {
+.pagination-results {
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    align-items: center;
 }
 
 .results {
-    font-weight: 600;
+    margin: 10px;
 }
 
 .name-column {
     min-width: 300px;
 }
+
 .city-column {
     min-width: 200px;
 }
+
 .state-column {
     min-width: 50px;
 }
+
 .phone-column {
     min-width: 125px;
 }
+
 .genre-column {
     min-width: 450px;
 }
@@ -105,4 +127,8 @@ p {
 
 .page-button {
     margin-right: 5px;
+}
+
+.info {
+    font-weight: 400;
 }

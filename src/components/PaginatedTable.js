@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Table from './Table';
 import loadingSpinner from '../assets/loading-spinner.svg';
+import Pagination from 'react-bootstrap/Pagination';
 
 const PaginatedTable = ({ isLoaded, setIsLoaded, restaurants }) => {
     const [paginatedRestaurants, setPaginatedRestaurants] = useState([]);
@@ -18,11 +19,19 @@ const PaginatedTable = ({ isLoaded, setIsLoaded, restaurants }) => {
 
     const displayAvailablePages = () => {
         const pages = Array.from(Array(Math.ceil(restaurants.length / 10)).keys());
-        return pages.map((page) => (
-            <button key={page} className="page-button" onClick={handleClick}>
-                {page + 1}
-            </button>
-        ));
+        return (
+            <Pagination>
+                {pages.map((page) => (
+                    <Pagination.Item
+                        key={page}
+                        onClick={handleClick}
+                        active={page === currentPage}
+                    >
+                        {page + 1}
+                    </Pagination.Item>
+                ))}
+            </Pagination>
+        );
     };
 
     useEffect(() => {
@@ -37,15 +46,13 @@ const PaginatedTable = ({ isLoaded, setIsLoaded, restaurants }) => {
         <>
             {isLoaded ? (
                 <>
-                    <div className="pagination">
+                    <Table restaurants={paginatedRestaurants} />
+                    <div className="pagination-results">
                         <p className="results">{restaurants.length} Results</p>
                         {restaurants.length > 0 && (
-                            <div className="pages">
-                                Show Page: {displayAvailablePages()}
-                            </div>
+                            <div className="pages">{displayAvailablePages()}</div>
                         )}
                     </div>
-                    <Table restaurants={paginatedRestaurants} />
                 </>
             ) : (
                 <>

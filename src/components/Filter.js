@@ -23,7 +23,7 @@ const Filter = ({
 
     return (
         <div className="filter">
-            <p>Filter By: </p>
+            <p className="filter-text">Filter By: </p>
             <label htmlFor="state-filter">State:</label>
             <select
                 id="state-filter"
