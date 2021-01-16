@@ -128,3 +128,7 @@ button {
 .page-button {
     margin-right: 5px;
 }
+
+.info {
+    font-weight: 400;
+}
