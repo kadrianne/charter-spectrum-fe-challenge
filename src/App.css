@@ -52,7 +52,6 @@ select {
 p {
     display: inline;
     font-weight: 700;
-    margin: 0 0px 10px 0;
 }
 
 button {
@@ -88,7 +87,7 @@ button {
 }
 
 .results {
-    font-weight: 600;
+    align-self: center;
 }
 
 .name-column {
