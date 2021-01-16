@@ -4,6 +4,7 @@ import PaginatedTable from './components/PaginatedTable';
 import SearchFilter from './components/SearchFilter';
 
 function App() {
+    const [isLoaded, setIsLoaded] = useState(false);
     const [restaurants, setRestaurants] = useState([]);
     const [sortedRestaurants, setSortedRestaurants] = useState([]);
     const [updatedRestaurants, setUpdatedRestaurants] = useState([]);
@@ -38,12 +39,16 @@ function App() {
 
     return (
         <div className="App">
-            <h1>Filter Restaurants</h1>
+            <h1>Restaurants Galore!</h1>
             <SearchFilter
                 restaurants={sortedRestaurants}
                 setUpdatedRestaurants={setUpdatedRestaurants}
             />
-            <PaginatedTable restaurants={updatedRestaurants} />
+            <PaginatedTable
+                isLoaded={isLoaded}
+                setIsLoaded={setIsLoaded}
+                restaurants={updatedRestaurants}
+            />
         </div>
     );
 }
