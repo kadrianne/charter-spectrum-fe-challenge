@@ -26,9 +26,7 @@ const PaginatedTable = ({ isLoaded, setIsLoaded, restaurants }) => {
     };
 
     useEffect(() => {
-        if (restaurants.length > 0) {
-            paginateRestaurants();
-        }
+        paginateRestaurants();
     }, [restaurants, currentPage]);
 
     useEffect(() => {
@@ -41,7 +39,11 @@ const PaginatedTable = ({ isLoaded, setIsLoaded, restaurants }) => {
                 <>
                     <div className="pagination">
                         <p className="results">{restaurants.length} Results</p>
-                        <div className="pages">Show Page: {displayAvailablePages()}</div>
+                        {restaurants.length > 0 && (
+                            <div className="pages">
+                                Show Page: {displayAvailablePages()}
+                            </div>
+                        )}
                     </div>
                     <Table restaurants={paginatedRestaurants} />
                 </>
