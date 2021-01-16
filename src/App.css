@@ -50,8 +50,8 @@ select {
 }
 
 p {
-    display: inline;
     font-weight: 700;
+    margin: 0;
 }
 
 button {
@@ -65,10 +65,15 @@ button {
 .search-filter {
     display: flex;
     align-items: flex-end;
+    margin-bottom: 20px;
 }
 
 .filter {
     margin: auto 0;
+}
+
+.filter-text {
+    display: inline;
 }
 
 .button-toggle {
@@ -81,13 +86,14 @@ button {
     text-align: center;
 }
 
-.pagination {
+.pagination-results {
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    align-items: center;
 }
 
 .results {
-    align-self: center;
+    margin: 10px;
 }
 
 .name-column {

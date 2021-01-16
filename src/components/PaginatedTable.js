@@ -46,13 +46,13 @@ const PaginatedTable = ({ isLoaded, setIsLoaded, restaurants }) => {
         <>
             {isLoaded ? (
                 <>
-                    <div className="pagination">
+                    <Table restaurants={paginatedRestaurants} />
+                    <div className="pagination-results">
                         <p className="results">{restaurants.length} Results</p>
                         {restaurants.length > 0 && (
                             <div className="pages">{displayAvailablePages()}</div>
                         )}
                     </div>
-                    <Table restaurants={paginatedRestaurants} />
                 </>
             ) : (
                 <>
