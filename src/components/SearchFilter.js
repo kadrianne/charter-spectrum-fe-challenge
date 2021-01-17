@@ -74,15 +74,7 @@ const SearchFilter = ({ restaurants, setUpdatedRestaurants }) => {
                 handleTextChange={handleTextChange}
                 handleSubmit={handleSubmit}
             />
-            <Button
-                size="sm"
-                variant="outline-primary"
-                className="button-toggle"
-                onClick={handleButtonToggle}
-            >
-                {filtersOn ? 'Add' : 'Clear'} Filters
-            </Button>
-            {!filtersOn && (
+            {filtersOn && (
                 <Filter
                     restaurants={restaurants}
                     selectedState={selectedState}
@@ -91,6 +83,14 @@ const SearchFilter = ({ restaurants, setUpdatedRestaurants }) => {
                     handleGenreChange={handleGenreChange}
                 />
             )}
+            <Button
+                size="sm"
+                variant="outline-primary"
+                className="button-toggle"
+                onClick={handleButtonToggle}
+            >
+                {filtersOn ? 'Clear' : 'Add'} Filters
+            </Button>
         </div>
     );
 };
