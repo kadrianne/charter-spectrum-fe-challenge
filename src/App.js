@@ -9,6 +9,7 @@ function App() {
     const [restaurants, setRestaurants] = useState([]);
     const [sortedRestaurants, setSortedRestaurants] = useState([]);
     const [updatedRestaurants, setUpdatedRestaurants] = useState([]);
+    const [currentPage, setCurrentPage] = useState(0);
 
     const compareAlphabeticallyByNameThenState = (a, b) => {
         if (a.name.toUpperCase() > b.name.toUpperCase()) return 1;
@@ -44,8 +45,11 @@ function App() {
             <SearchFilter
                 restaurants={sortedRestaurants}
                 setUpdatedRestaurants={setUpdatedRestaurants}
+                setCurrentPage={setCurrentPage}
             />
             <PaginatedTable
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
                 isLoaded={isLoaded}
                 setIsLoaded={setIsLoaded}
                 restaurants={updatedRestaurants}

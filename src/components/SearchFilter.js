@@ -4,7 +4,7 @@ import Search from './Search';
 import useFormField from '../hooks/useFormField';
 import Button from 'react-bootstrap/Button';
 
-const SearchFilter = ({ restaurants, setUpdatedRestaurants }) => {
+const SearchFilter = ({ restaurants, setUpdatedRestaurants, setCurrentPage }) => {
     const [searchedRestaurants, setSearchedRestaurants] = useState([]);
     const [selectedState, handleStateChange, setSelectedState] = useFormField('All');
     const [selectedGenre, handleGenreChange, setSelectedGenre] = useFormField('All');
@@ -40,6 +40,7 @@ const SearchFilter = ({ restaurants, setUpdatedRestaurants }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setCurrentPage(0);
         searchFilterLogic();
     };
 
@@ -66,6 +67,10 @@ const SearchFilter = ({ restaurants, setUpdatedRestaurants }) => {
             setSearchedRestaurants(restaurants);
         }
     }, [searchText]);
+
+    useEffect(() => {
+        setCurrentPage(0);
+    }, [selectedState, selectedGenre]);
 
     return (
         <div className="search-filter">

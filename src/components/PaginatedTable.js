@@ -3,9 +3,14 @@ import Table from './Table';
 import loadingSpinner from '../assets/loading-spinner.svg';
 import Pagination from 'react-bootstrap/Pagination';
 
-const PaginatedTable = ({ isLoaded, setIsLoaded, restaurants }) => {
+const PaginatedTable = ({
+    currentPage,
+    setCurrentPage,
+    isLoaded,
+    setIsLoaded,
+    restaurants,
+}) => {
     const [paginatedRestaurants, setPaginatedRestaurants] = useState([]);
-    const [currentPage, setCurrentPage] = useState(0);
 
     const paginateRestaurants = () => {
         const lowerBoundary = 10 * currentPage;
